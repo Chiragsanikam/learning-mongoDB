@@ -29,13 +29,11 @@ app.post('/person', async (req,res)=>{
   }
 })
 
-app.get('/data', async (req,res)=>{
-const name =req.body;
-
+app.post('/data', async (req,res)=>{
+const {name,updatedName} =req.body;
 
 try{
-
-const response= await Person.find(name)
+const response= await Person.findOneAndUpdate({name:name},{name:updatedName},{new:true})
 res.send(response)
 }catch(err){
   res.send(err)
